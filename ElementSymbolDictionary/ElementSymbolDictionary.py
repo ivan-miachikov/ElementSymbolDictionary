@@ -2,7 +2,7 @@ import sys
 import enchant
 d = enchant.Dict("en_UK")
 
-maxSearchLength = 11
+maxSearchLength = 11 #22 letters is the longest word likely to be encountered in general reading
 output = open("element_symbol_words.txt", "w")
 
 ##check the combination of atomic numbers against the dictionary
