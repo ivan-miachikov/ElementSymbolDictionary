@@ -1,7 +1,5 @@
 import enchant
-
 d = enchant.Dict("en_UK")
-
 
 ##check the combination of atomic numbers against the dictionary
 ##if found, output the word and atomic number combination
@@ -20,15 +18,6 @@ def checkCombo(combo, elementSymbols, dictionary):
 	return 0
 
 
-def addToCombo(combo):
-	
-	for i in range(len(combo)):
-		if i == None:
-			combo[i] = addedSymbol
-	
-	return combo
-
-
 ##extract elemental symbols and atomic numbers from txt and put into dictionary
 input_file = open("elemental_symbols.txt", "r")
 
@@ -41,14 +30,31 @@ for line in input_file:
 
 	elementSymbols[int(valuePair[0])] = valuePair[1]
 
-maxSearchLength = 2
 
-##for i in range(1, maxSearchLength):
-for j in range(1, (len(elementSymbols) + 1)):	
-	combo = [0, 0]
-	combo[0] = j
+##main combination creation code
+maxSearchLength = 3
+
+for comboLen in range(1, maxSearchLength + 1) :
 	
-	for k in range(1, (len(elementSymbols) + 1)):					
-		combo[1] = k
+	combo =[None] * comboLen
+	sym = 1
 
+	for i in range(comboLen):
+		combo[i] = sym
+	
+	while combo[0] != 119:
 		checkCombo(combo, elementSymbols, d)
+
+		combo[-1] += 1
+
+		combo = combo[::-1]
+
+		for x in range(len(combo)):
+			if combo[-1] == 119:
+				break
+			
+			elif combo[x] == 119:
+				combo[x] = 1
+				combo[x+1] += 1
+		
+		combo = combo[::-1]
