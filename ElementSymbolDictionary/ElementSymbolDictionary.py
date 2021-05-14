@@ -2,7 +2,7 @@ import sys
 import enchant
 d = enchant.Dict("en_UK")
 
-maxSearchLength = 5
+maxSearchLength = 11
 output = open("element_symbol_words.txt", "w")
 
 ##check the combination of atomic numbers against the dictionary
@@ -17,7 +17,9 @@ def checkCombo(combo, elementSymbols, dictionary):
 	testWord = "".join(symCombo)
 
 	if dictionary.check(testWord):
-		return output.write(testWord + "," + str(combo) + "\n")
+		outputString = testWord + "," + str(combo) + "\n"
+		print(outputString)
+		return output.write(outputString)
 
 	return 0
 
